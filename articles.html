@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мои статьи — Светлакова Наталья</title>
+  <link rel="canonical" href="sitemap.xml">
+  <meta name="description" content="Статьи по медицине, психосоматике и здоровью. Автор — Светлакова Наталья.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Мои статьи — Светлакова Наталья">
+  <meta property="og:description" content="Статьи по медицине, психосоматике и здоровью.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://natalyasvetlakova.github.io/medical-certificates/articles.html">
+  <meta property="og:image" content="https://natalyasvetlakova.github.io/medical-certificates/preview.jpg">
+  <style>
+    :root {
+      --bg: #f5f8fb;
+      --bg-card: #ffffff;
+      --text: #1a2b3c;
+      --text-muted: #5a7085;
+      --primary: #0e6ba8;
+      --primary-dark: #0a4f7c;
+      --primary-soft: #e3f0f8;
+      --accent: #2ec4b6;
+      --border: #d9e3ec;
+      --radius: 14px;
+      --shadow-sm: 0 2px 10px rgba(14, 107, 168, 0.06);
+      --shadow-lg: 0 18px 42px rgba(14, 107, 168, 0.16);
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 48px 24px 80px;
+      line-height: 1.55;
+      background-image:
+        radial-gradient(circle at 10% 0%, rgba(14, 107, 168, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 100%, rgba(46, 196, 182, 0.05) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+    .container { max-width: 1240px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 56px; }
+    h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--primary);
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      margin: 0 0 12px;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin: 0 auto;
+      max-width: 560px;
+    }
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      margin: 24px auto 0;
+      border-radius: 3px;
+      opacity: 0.85;
+    }
+    /* Навигация */
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 22px;
+      border-radius: 100px;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      border: 1.5px solid transparent;
+    }
+    .nav a.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(14, 107, 168, 0.3);
+    }
+    .nav a:not(.active) {
+      background: var(--bg-card);
+      color: var(--primary);
+      border-color: var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav a:not(.active):hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    .nav .nav-icon { font-size: 1.1em; }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 28px;
+    }
+    .article-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: var(--shadow-sm);
+      transition:
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.3s ease;
+    }
+    .article-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(14, 107, 168, 0.3);
+    }
+    .article-thumb {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      background: var(--primary-soft);
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .article-card:hover .article-thumb img {
+      transform: scale(1.05);
+    }
+    .article-info {
+      padding: 20px 22px 22px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .article-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .article-title {
+      font-family: Georgia, serif;
+      font-weight: 500;
+      font-size: 1.12rem;
+      margin: 0;
+      line-height: 1.35;
+      color: var(--text);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .article-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.5;
+    }
+    .article-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+      padding-top: 8px;
+    }
+    .article-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      letter-spacing: 0.2px;
+    }
+    .article-open {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      box-shadow: 0 6px 16px rgba(14, 107, 168, 0.4);
+    }
+    .article-card:hover .article-open {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .loading, .error {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-muted);
+      grid-column: 1 / -1;
+      font-size: 1rem;
+    }
+    .loading::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 20px;
+      border: 3px solid var(--primary-soft);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .error { color: var(--primary); }
+
+    /* Кнопка темы */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--primary);
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-lg);
+    }
+    html[data-theme="dark"] {
+      --bg: #0f1a24;
+      --bg-card: #16232f;
+      --text: #e6eef5;
+      --text-muted: #8fa4b8;
+      --border: #23333f;
+      --primary: #4da6d9;
+      --primary-dark: #2b7bb0;
+      --primary-soft: rgba(77, 166, 217, 0.15);
+      --accent: #45d6c7;
+    }
+    html[data-theme="dark"] body {
+      background-image:
+        radial-gradient(circle at 10% 0%, rgba(77, 166, 217, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 100%, rgba(69, 214, 199, 0.06) 0%, transparent 40%);
+    }
+    @media (max-width: 600px) {
+      body { padding: 28px 16px 60px; }
+      header { margin-bottom: 36px; }
+      .gallery { gap: 18px; grid-template-columns: 1fr; }
+      .article-info { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
+    <span class="theme-toggle__icon">🌙</span>
+  </button>
+
+  <div class="container">
+    <header>
+      <h1>Мои статьи</h1>
+      <p class="subtitle">Публикации по медицине, психосоматике и здоровью</p>
+      <p class="subtitle">Светлакова Наталья</p>
+      <div class="divider"></div>
+    </header>
+
+    <!-- Навигация -->
+    <nav class="nav">
+      <a href="index.html">
+        <span class="nav-icon">📜</span> Сертификаты
+      </a>
+      <a href="articles.html" class="active">
+        <span class="nav-icon">✍️</span> Статьи
+      </a>
+    </nav>
+
+    <div class="gallery" id="gallery">
+      <div class="loading">Загружаю статьи…</div>
+    </div>
+  </div>
+
+  <script>
+    // Переключатель темы
+    (function initTheme() {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      const btn = document.getElementById('theme-toggle');
+      const icon = btn.querySelector('.theme-toggle__icon');
+      icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+      btn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        icon.textContent = next === 'dark' ? '☀️' : '🌙';
+      });
+    })();
+
+    const gallery = document.getElementById('gallery');
+
+    function formatDate(iso) {
+      const d = new Date(iso);
+      return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    async function loadArticles() {
+      try {
+        const res = await fetch('articles.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const articles = await res.json();
+
+        if (!articles.length) {
+          gallery.innerHTML = '<div class="error">Пока нет статей.</div>';
+          return;
+        }
+
+        // Сортировка: новые сверху
+        articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        gallery.innerHTML = articles.map(a => `
+          <a href="${a.url}" target="_blank" rel="noopener" class="article-card">
+            <div class="article-thumb">
+              <img src="${a.image}" alt="${a.title}" loading="lazy"
+                   onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 250%22><rect fill=%22%23e3f0f8%22 width=%22400%22 height=%22250%22/><text x=%2250%25%22 y=%2250%25%22 fill=%22%230e6ba8%22 font-family=%22Georgia%22 font-size=%2218%22 text-anchor=%22middle%22 dy=%22.3em%22>Статья</text></svg>'">
+            </div>
+            <div class="article-info">
+              <span class="article-date">${formatDate(a.date)}</span>
+              <h3 class="article-title">${a.title}</h3>
+              <p class="article-desc">${a.description}</p>
+              <div class="article-tags">
+                ${(a.tags || []).map(t => `<span class="article-tag">${t}</span>`).join('')}
+              </div>
+            </div>
+            <span class="article-open" aria-hidden="true">↗</span>
+          </a>
+        `).join('');
+      } catch (err) {
+        gallery.innerHTML = `<div class="error">Не удалось загрузить статьи.<br>${err.message}</div>`;
+      }
+    }
+
+    loadArticles();
+  </script>
+</body>
+</html>

@@ -59,14 +59,11 @@
 
 ## 🗂 Структура проекта
 medical-certificates/
-├── index.html
-├── certificates/          ← только сертификаты
-│   ├── 2022.10.28.pdf
-│   └── ...
-├── docs/                  ← сюда скриншоты
-│   ├── light.jpg
-│   └── dark.jpg
-└── README.md
+├── index.html          (страница сертификатов)
+├── articles.html       (новая страница статей)
+├── articles.json       (данные статей)
+├── sitemap.xml
+└── certificates/       (папка с файлами сертификатов)
 
 
 ---
