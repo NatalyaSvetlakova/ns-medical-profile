@@ -64,6 +64,13 @@ medical-certificates/
 ├── articles.json       (данные статей)
 ├── sitemap.xml
 └── certificates/       (папка с файлами сертификатов)
+└── articles/              ← папка для статей
+    ├── images/            ← иллюстрации
+    │   ├── family-scenario.jpg
+    │   └── anxiety.jpg
+    └── texts/             ← полные тексты статей (если нужны)
+        ├── family-scenario.html
+        └── anxiety.html
 
 
 ---
