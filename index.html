@@ -630,28 +630,261 @@
       opacity: 0.85;
     }
 
-    /* ===== Адаптив ===== */
-    @media (max-width: 600px) {
-      body { padding: 28px 16px 60px; }
-      header { margin-bottom: 36px; }
-      .gallery {
-        gap: 18px;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      }
-      .cert-info { padding: 14px 14px 16px; }
-      .cert-title { font-size: 0.95rem; }
-      .scroll-top {
-        bottom: 20px;
-        right: 20px;
-        width: 44px;
-        height: 44px;
-      }
-      .scroll-top svg { width: 18px; height: 18px; }
-      .site-footer { margin-top: 56px; padding: 32px 16px 20px; }
-      .footer-copy { font-size: 0.85rem; }
-      .footer-note { font-size: 0.72rem; }
+        /* ===== Раскладка с сайдбаром ===== */
+     .page-layout {
+      display: grid;
+      grid-template-columns: 215px minmax(0, 1fr);
+      gap: 36px;
+      align-items: start;
     }
-     /* ===== Красивая заглушка для PDF (без iframe) ===== */
+    .main-content { min-width: 0; }
+
+    /* ===== Сайдбар ===== */
+    .sidebar {
+      position: sticky;
+      top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-self: start;          /* не растягивается под высоту галереи */
+      /* Важно: без max-height и overflow — скроллится только список внутри аккордеона */
+    }
+
+    /* ===== Аккордеон ===== */
+    .accordion {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .accordion:hover {
+      border-color: rgba(14, 107, 168, 0.25);
+    }
+    .accordion.is-open {
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(14, 107, 168, 0.3);
+    }
+
+    /* Кнопка-заголовок — всегда сверху, не участвует в скролле */
+    .accordion__trigger {
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 16px 14px;
+      background: var(--primary);          /* ← синий фон кнопки */
+      border: none;
+      border-radius: 11px;                 /* совпадает с радиусом аккордеона */
+      cursor: pointer;
+      text-align: left;
+      color: #ffffff;                      /* белый текст */
+      font-family: inherit;
+      transition: background-color 0.25s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 14px rgba(14, 107, 168, 0.22);
+    }
+    .accordion__trigger:hover {
+      background: var(--primary-dark);     /* темнее при наведении */
+      box-shadow: 0 8px 22px rgba(14, 107, 168, 0.35);
+    }
+    .accordion__trigger:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.7);
+      outline-offset: -2px;
+    }
+    .accordion.is-open .accordion__trigger {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      box-shadow: 0 6px 14px -6px rgba(14, 107, 168, 0.3);
+    }
+
+    .accordion__label {
+      flex: 1;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #ffffff;                        /* белый текст на синем */
+      letter-spacing: 0.1px;
+      line-height: 1.3;
+    }
+
+    .accordion__sum {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 0.86rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.88);      /* чуть приглушённый белый */
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.2px;
+      white-space: nowrap;
+    }
+    .accordion__unit {
+      font-size: 0.78em;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.65);
+      margin-left: 2px;
+    }
+
+    .accordion__chevron {
+      width: 12px;
+      height: 8px;
+      color: #ffffff;                        /* белая стрелка */
+      flex-shrink: 0;
+      opacity: 0.9;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+    }
+    .accordion.is-open .accordion__chevron {
+      transform: rotate(180deg);
+      color: #ffffff;
+      opacity: 1;
+    }
+
+    /* Панель — только обёртка, без grid-анимации */
+    .accordion__panel {
+      min-height: 0;
+    }
+
+    /* ===== Список фильтров с внутренним скроллом ===== */
+    .accordion__list {
+      /* В закрытом виде высота = 0 */
+      max-height: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 0 14px;
+      border-top: 1px solid transparent;
+      transition:
+        max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        padding 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .accordion.is-open .accordion__list {
+      /* Ключевое: ограничиваем высоту и включаем свой скролл */
+      max-height: min(620px, 68vh);
+      overflow-y: auto;
+      padding: 8px 14px 14px;
+      border-top-color: var(--border);
+
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+
+      /* Плавное «таяние» сверху и снизу */
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0,
+        #000 12px,
+        #000 calc(100% - 12px),
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0,
+        #000 12px,
+        #000 calc(100% - 12px),
+        transparent 100%
+      );
+    }
+
+    /* Тонкий скроллбар */
+    .accordion.is-open .accordion__list::-webkit-scrollbar { width: 5px; }
+    .accordion.is-open .accordion__list::-webkit-scrollbar-track { background: transparent; }
+    .accordion.is-open .accordion__list::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+      transition: background 0.2s ease;
+    }
+    .accordion.is-open .accordion__list:hover::-webkit-scrollbar-thumb {
+      background: rgba(14, 107, 168, 0.35);
+    }
+
+    /* ===== Пункт фильтра ===== */
+    .filter-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      padding: 9px 2px;
+      background: none;
+      border: none;
+      border-bottom: 1px solid transparent;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      line-height: 1.3;
+      transition: color 0.25s ease, border-color 0.25s ease, padding-left 0.25s ease;
+    }
+    .filter-item:last-child { border-bottom: none; }
+    .filter-item:hover {
+      color: var(--primary);
+      padding-left: 8px;
+    }
+    .filter-item.is-active {
+      color: var(--text);
+      border-bottom-color: rgba(14, 107, 168, 0.35);
+      padding-left: 8px;
+    }
+    .filter-item__label {
+      letter-spacing: 0.15px;
+    }
+    .filter-item__hours {
+      font-size: 0.78em;
+      font-style: italic;
+      color: var(--text-muted);
+      opacity: 0.8;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      transition: color 0.25s ease, opacity 0.25s ease;
+    }
+    .filter-item.is-active .filter-item__hours {
+      color: var(--primary);
+      opacity: 1;
+    }
+
+    /* Пустые специальности — приглушены */
+    .filter-item.is-empty {
+      opacity: 0.4;
+      cursor: default;
+    }
+    .filter-item.is-empty:hover {
+      color: var(--text-muted);
+      padding-left: 2px;
+    }
+
+    /* ===== Адаптив ===== */
+    @media (max-width: 900px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .sidebar {
+        position: static;
+        flex-direction: row;
+        gap: 12px;
+      }
+      .accordion { flex: 1; }
+      .accordion__trigger { padding: 14px 16px; }
+      .accordion__label { font-size: 0.9rem; }
+      .accordion__sum { font-size: 0.84rem; }
+      .accordion__list { padding: 0 16px; }
+      .accordion.is-open .accordion__list {
+        padding: 6px 16px 12px;
+        max-height: 55vh;         /* на мобильных короче */
+      }
+    }
+    @media (max-width: 600px) {
+      .sidebar { flex-direction: column; }
+    }
+
+    /* ===== Заглушка для PDF ===== */
     .cert-pdf-placeholder {
       display: flex;
       flex-direction: column;
@@ -668,7 +901,6 @@
                   border-color 0.4s ease;
       z-index: 1;
     }
-
     .cert-pdf-icon {
       display: flex;
       align-items: center;
@@ -683,14 +915,12 @@
       border-radius: 12px;
       box-shadow: 0 8px 22px rgba(14, 107, 168, 0.35);
     }
-
     .cert-pdf-label {
       font-size: 0.78rem;
       color: var(--text-muted);
       letter-spacing: 0.3px;
       font-weight: 500;
     }
-
     .cert-card:hover .cert-pdf-placeholder {
       transform: scale(1.04);
       border-color: var(--primary);
@@ -707,7 +937,7 @@
     html[data-theme="dark"] .cert-pdf-placeholder {
       background: linear-gradient(135deg, #1a2733 0%, #111c26 100%);
       border-color: rgba(77, 166, 217, 0.35);
-    }
+    } 
   </style>
 </head>
 <body>
@@ -745,9 +975,51 @@
           <span>Статьи</span>
         </a>
       </nav>
-    <div class="gallery" id="gallery">
-      <div class="loading">Загружаю сертификаты…</div>
+    <!-- ===== Раскладка: слева аккордеоны, справа галерея ===== -->
+    <div class="page-layout">
+
+      <aside class="sidebar">
+
+        <!-- Аккордеон 1: Часы по годам -->
+        <div class="accordion" id="acc-years">
+            <button class="accordion__trigger" type="button" aria-expanded="false">
+              <span class="accordion__label">По годам</span>
+              <svg class="accordion__chevron" viewBox="0 0 12 8" fill="none"
+                  stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                <path d="M1 1.5L6 6.5L11 1.5"/>
+              </svg>
+            </button>
+          <div class="accordion__panel">
+            <div class="accordion__list" id="filter-years-list"></div>
+          </div>
+        </div>
+
+        <!-- Аккордеон 2: Специальности -->
+        <div class="accordion" id="acc-specs">
+          <button class="accordion__trigger" type="button" aria-expanded="false">
+            <span class="accordion__label">По специализации</span>
+            <svg class="accordion__chevron" viewBox="0 0 12 8" fill="none"
+                 stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                 stroke-linejoin="round" aria-hidden="true">
+              <path d="M1 1.5L6 6.5L11 1.5"/>
+            </svg>
+          </button>
+          <div class="accordion__panel">
+            <div class="accordion__list" id="filter-specs-list"></div>
+          </div>
+        </div>
+
+      </aside>
+
+      <main class="main-content">
+        <div class="gallery" id="gallery">
+          <div class="loading">Загружаю сертификаты…</div>
+        </div>
+      </main>
+
     </div>
+
   </div>
   <footer class="site-footer">
   <div class="footer-inner">
@@ -785,6 +1057,7 @@
 
     // Красивые названия: имя файла без расширения → что показывать
     const TITLES = {
+      '2026.01.10': 'Онлайн-семинар «Как «расшевелить» мозг при КН:алгоритмы активации нейропластичности»',
       '2026.31.08': 'Мероприятие «Атеросклероз и ХСН»',
       '2026.28.09': 'Онлайн-семинар «Всё об аритмиях: желудочковая экстрасистолия»',
       '2026.24.09': 'Онлайн-семинар «Расстройства пищевого поведения»',
@@ -868,7 +1141,7 @@
       '2021.14.10': 'III международная конференция Евразийской ассоциации кардиологов «Спорные и нерешенные вопросы кардиологии 2021». День 2',
       '2021.10.09': 'Научно-практическая онлайн-конференция «Падающий пациент-XIII. Генетика в неврологии»',
       '2021.09.14': 'Общие нарушения психологического развития у детей',
-      '2021.09.10': 'Сертификат «»',
+      '2021.09.10': 'Школа «Маски головокружения»',
       '2021.01.10': 'Евразийский Конгресс Внутренней Медицины. День 3',
       '2020.31.05': 'VIII Международный междисциплинарный конгресс по заболеваниям органов головы и шеи',
       '2020.28.08': '«Реабилитация больных с COVID-19 гастроинтестинальной патологией»',
@@ -900,8 +1173,7 @@
       '2018.24.11': 'IV Всероссийский Съезд Ассоциации Детских Аллергологов и Иммунологов. День 2-й',
       '2018.23.11': 'IV Всероссийский Съезд Ассоциации Детских Аллергологов и Иммунологов России. День 1-й',
       '2017.22.11': 'XII Национальный Конгресс терапевтов',
-      '2016.28.11': 'Ассоциация врачей интегральной превентивной и антивозрастной медицины «ПревентЭйдж» (PreventAge)',
-      '2016.25.11': 'XI Национальный Конгресс терапевтов',
+      '2016.28.11': 'Ассоциация врачей интегральной превентивной и антивозрастной медицины «ПревентЭйдж» (PreventAge)',      
       '2016.23.11': 'XI Национальный Конгресс терапевтов',
       '2015.21.11': 'Сертификат подтверждает, что является членом Российской ассоциации аллергологов и клинических иммунологов',
       '2015.16.10': 'X Национальный конгресс терапевтов',
@@ -909,6 +1181,7 @@
 
     // Метаданные: имя файла без расширения → «кто выдал · год»
     const META = {
+      '2026.01.10': 'Портал НМиФО · 2026',
       '2026.31.08': 'Координационный совет по НМиФО · 2026',
       '2026.28.09': 'Портал НМиФО · 2026',
       '2026.24.09': 'Портал НМиФО · 2026',
@@ -1024,8 +1297,7 @@
       '2018.24.11': 'Портал НМиФО · 2020',
       '2018.23.11': 'Портал НМиФО · 2020',
       '2017.22.11': 'Координационный совет по НМиФО · 2020',
-      '2016.28.11': 'Ассоциация врачей интегральной превентивной и антивозрастной медицины «ПревентЭйдж» · 2016',
-      '2016.25.11': 'Координационный совет по НМиФО · 2016',
+      '2016.28.11': 'Ассоциация врачей интегральной превентивной и антивозрастной медицины «ПревентЭйдж» · 2016',      
       '2016.23.11': 'Координационный совет по НМиФО · 2016',
       '2015.21.11': 'Некоммерческая общественная организация «Российская ассоциация аллергологов и клинических иммунологов» · 2015',
       '2015.16.10': 'Координационный совет по НМиФО · 2015',
@@ -1033,6 +1305,7 @@
 
     // Часы обучения: имя файла без расширения → число часов
     const HOURS = {
+      '2026.01.10': 1,
       '2026.31.08': 1,
       '2026.28.09': 1,
       '2026.24.09': 1,
@@ -1147,11 +1420,154 @@
       '2020.03.10': 5,
       '2018.24.11': 6,
       '2018.23.11': 6,
-      '2017.22.11': 6,
-      '2016.25.11': 18,
+      '2017.22.11': 6,      
       '2016.23.11': 18,
       '2015.16.10': 18,
     };
+
+    // ===== Специальности =====
+    // Ключ → человекочитаемое название (для кнопок-фильтров)
+    const SPECIALTIES = {      
+      therapy: 'Терапия',
+      allergo: 'Аллергология и иммунология',
+      pulmo:   'Пульмонология',
+      endo:    'Эндокринология',
+      gastro:  'Гастроэнтерология',
+      cardio:  'Кардиология',
+      infect:  'Инфекционные болезни',
+      derm:    'Дерматология',
+      onco:    'Онкология',
+      gyn:     'Акушерство и гинекология',
+      neuro:   'Неврология',
+      pediatr: 'Педиатрия',      
+      other:   'Общая практика',
+    };
+
+    // Привязка сертификата к специальности: base-имя файла → ключ специальности
+    // Если сертификата тут нет — он попадёт в «Прочее».
+    const CERT_SPECIALTY = {
+      '2026.01.10': 'neuro',
+      '2026.31.08': 'cardio',
+      '2026.28.09': 'cardio',     
+      '2026.24.09': 'neuro',
+      '2026.22.09': 'cardio',
+      '2026.21.09': 'cardio',
+      '2026.17.09': 'other',
+      '2026.15.09': 'other',
+      '2026.14.09': 'derm',
+      '2026.11.09': 'other',
+      '2026.10.09': 'neuro',
+      '2026.09.09': 'other',
+      '2026.08.09': 'gastro',
+      '2026.07.09': 'gastro',
+      '2026.03.09': 'allergo',
+      '2026.02.09': 'cardio',
+      '2024.05.04': 'therapy',
+      '2024.04.05': 'therapy',
+      '2024.01.04': 'therapy',
+      '2024.04.04': 'therapy',
+      '2024.04.03': 'therapy',
+      '2024.03.04': 'therapy',
+      '2023.29.04': 'allergo',      
+      '2023.29.03': 'endo',
+      '2023.22.11': 'therapy',
+      '2023.22.02': 'therapy',
+      '2023.21.11': 'therapy',
+      '2023.15.02': 'infect',
+      '2023.08.02': 'other',
+      '2023.10.02': 'other',
+      '2022.29.11': 'other',
+      '2022.28.10': 'therapy',
+      '2022.28.09': 'allergo',
+      '2022.28.01': 'therapy',
+      '2022.27.04': 'neuro',
+      '2022.26.10': 'therapy',
+      '2022.26.04': 'gastro',
+      '2022.24.08': 'infect',
+      '2022.23.11': 'infect',
+      '2022.22.06': 'infect',
+      '2022.22.02': 'infect',
+      '2022.21.09': 'onco',
+      '2022.20.09': 'onco',
+      '2022.18.05': 'cardio',
+      '2022.14.10': 'therapy',
+      '2022.13.10': 'therapy',
+      '2022.12.10': 'therapy',
+      '2022.12.07': 'other',
+      '2022.12.02': 'allergo',
+      '2022.15.11': 'other',
+      '2022.11.11': 'other',
+      '2022.29.10': 'therapy',
+      '2022.25.10': 'therapy',
+      '2022.10.11': 'pulmo',
+      '2022.07.12': 'cardio',
+      '2022.07.06': 'therapy',
+      '2022.21.06': 'therapy',
+      '2022.06.12': 'pulmo',
+      '2022.06.04': 'other',
+      '2022.05.12': 'neuro',
+      '2022.05.04': 'other',
+      '2022.04.04': 'other',
+      '2022.02.12': 'allergo',
+      '2022.02.03': 'neuro',
+      '2021.29.10': 'other',
+      '2021.29.09': 'therapy',
+      '2021.30.09': 'cardio',
+      '2021.24.09': 'other',
+      '2021.22.09': 'onco',
+      '2021.19.10': 'neuro',
+      '2021.17.09': 'pediatr',
+      '2021.16.10': 'derm',
+      '2021.16.09': 'cardio',
+      '2021.18.09': 'pediatr',
+      '2021.15.09': 'pediatr',
+      '2021.25.09': 'gyn',
+      '2021.23.09': 'other',
+      '2021.21.09': 'gyn',
+      '2021.14.09': 'onco',
+      '2021.20.09': 'onco',
+      '2021.11.09': 'therapy',
+      '2021.14.10': 'cardio',
+      '2021.10.09': 'neuro',
+      '2021.09.14': 'pediatr',
+      '2021.09.10': 'neuro',
+      '2021.01.10': 'therapy',
+      '2020.31.05': 'other',
+      '2020.28.08': 'gastro',
+      '2020.28.04': 'allergo',
+      '2020.27.11': 'gyn',
+      '2020.28.11': 'gyn',
+      '2020.26.11': 'other',
+      '2020.29.11': 'other',
+      '2020.25.11': 'neuro',
+      '2020.25.02': 'therapy',
+      '2020.24.11': 'neuro',
+      '2020.24.05': 'gastro',
+      '2020.23.05': 'other',
+      '2020.21.11': 'infect',
+      '2020.20.11': 'gyn',
+      '2020.19.11': 'other',
+      '2020.17.11': 'allergo',
+      '2020.16.11': 'endo',
+      '2020.15.06': 'allergo',
+      '2020.13.11': 'allergo',
+      '2020.12.11': 'allergo',
+      '2020.30.11': 'gyn',
+      '2020.22.11': 'cardio',
+      '2020.11.11': 'neuro',
+      '2020.11.06.': 'infect',
+      '2020.09.06': 'gastro',
+      '2020.08.06': 'cardio',
+      '2020.03.10': 'infect',
+      '2018.24.11': 'allergo',
+      '2018.23.11': 'allergo',
+      '2017.22.11': 'therapy',
+      '2016.28.11': 'therapy',      
+      '2016.23.11': 'therapy',
+      '2015.21.11': 'allergo',
+      '2015.16.10': 'therapy',
+    };
+
 
       const gallery = document.getElementById('gallery');
 
@@ -1200,6 +1616,208 @@
       });
     })();
 
+    // ===== Состояние фильтров =====
+    let allCerts = [];           // все сертификаты из GitHub
+    let activeYear = 'all';      // 'all' | 2020 | 2021 | ...
+    let activeSpec = 'all';      // 'all' | 'cardio' | ...
+
+    // Извлекаем год из base-имени (формат YYYY.DD.MM)
+    function getYearFromBase(base) {
+      const m = base.match(/^(\d{4})/);
+      return m ? +m[1] : null;
+    }
+
+    // Специальность сертификата (если не указана — 'other')
+    function getSpecFromBase(base) {
+      return CERT_SPECIALTY[base] || 'other';
+    }
+
+    // ===== Отрисовка одной карточки =====
+    function renderCard(file) {
+      const ext = getExt(file.name);
+      const base = getBase(file.name);
+      const isPdf = PDF_EXT.includes(ext);
+      const fileUrl = file.download_url
+        || `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/${FOLDER}/${encodePath(file.name)}`;
+
+      // Умный поиск: сначала с расширением, потом без
+      const fullKey = base + '.' + ext;
+      const titleKey = (TITLES[fullKey] !== undefined) ? fullKey : base;
+      const metaKey  = (META[fullKey]   !== undefined) ? fullKey : base;
+      const hoursKey = (HOURS[fullKey]  !== undefined) ? fullKey : base;
+
+      const title = TITLES[titleKey] || humanize(base);
+      const meta  = META[metaKey] || '';
+      const typeLabel = isPdf ? 'PDF' : 'IMG';
+      const hours = HOURS[hoursKey];
+
+      const thumb = isPdf
+        ? `<div class="cert-pdf-placeholder">
+             <div class="cert-pdf-icon">PDF</div>
+             <div class="cert-pdf-label">Открыть документ</div>
+           </div>`
+        : `<img src="${fileUrl}" alt="${title}" loading="lazy">`;
+
+      return `
+        <a href="${fileUrl}" target="_blank" rel="noopener" class="cert-card">
+          <span class="cert-type">${typeLabel}</span>
+          ${hours ? `
+              <span class="cert-hours" title="Объём программы">
+                  <span class="cert-hours__icon" aria-hidden="true">⏱</span>
+                  <span class="cert-hours__value">${hours} ${pluralHours(hours)}</span>
+              </span>
+              ` : ''}
+          <div class="cert-thumb">${thumb}</div>
+          <div class="cert-info">
+            <h3 class="cert-title">${title}</h3>
+            ${meta ? `<p class="cert-meta">${meta}</p>` : ''}
+          </div>
+          <span class="cert-open" aria-hidden="true">↗</span>
+        </a>
+      `;
+    }
+
+    // ===== Фильтрация =====
+    function filterCerts() {
+      return allCerts.filter(f => {
+        const base = getBase(f.name);
+        const year = getYearFromBase(base);
+        const spec = getSpecFromBase(base);
+        if (activeYear !== 'all' && year !== +activeYear) return false;
+        if (activeSpec !== 'all' && spec !== activeSpec) return false;
+        return true;
+      });
+    }
+
+    // ===== Рендер галереи =====
+    function renderGallery() {
+      const filtered = filterCerts();
+      if (filtered.length === 0) {
+        gallery.innerHTML = `<div class="error">По выбранным фильтрам ничего не найдено.</div>`;
+      } else {
+        gallery.innerHTML = filtered.map(renderCard).join('');
+      }
+      updateStats(filtered);
+    }
+   
+        // ===== Построение фильтров =====
+    function buildFilters() {
+      const yearsListEl = document.getElementById('filter-years-list');
+      const specsListEl = document.getElementById('filter-specs-list');
+      if (!yearsListEl || !specsListEl) return;
+
+      const yearStats = {};   // { 2022: hours }
+      const specStats = {};   // { cardio: hours }
+
+      allCerts.forEach(f => {
+        const base  = getBase(f.name);
+        const ext   = getExt(f.name);
+        const year  = getYearFromBase(base);
+        const spec  = getSpecFromBase(base);
+        const fullKey = base + '.' + ext;
+        const hoursKey = (HOURS[fullKey] !== undefined) ? fullKey : base;
+        const h = Number(HOURS[hoursKey]) || 0;
+
+        if (year) {
+          if (!yearStats[year]) yearStats[year] = 0;
+          yearStats[year] += h;
+        }
+        if (!specStats[spec]) specStats[spec] = 0;
+        specStats[spec] += h;
+      });
+
+      // ----- ГОДЫ -----
+      const years = Object.keys(yearStats).map(Number).sort((a, b) => b - a);
+      const totalYearsHours = Object.values(yearStats).reduce((s, v) => s + v, 0);
+
+      yearsListEl.innerHTML = `
+        <button class="filter-item is-active" data-year="all">
+          <span class="filter-item__label">Все годы</span>
+          <span class="filter-item__hours">${totalYearsHours} ч</span>
+        </button>
+        ${years.map(y => `
+          <button class="filter-item" data-year="${y}">
+            <span class="filter-item__label">${y}</span>
+            <span class="filter-item__hours">${yearStats[y]} ч</span>
+          </button>
+        `).join('')}
+      `;
+      yearsListEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('.filter-item');
+        if (!btn) return;
+        yearsListEl.querySelectorAll('.filter-item').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        activeYear = btn.dataset.year === 'all' ? 'all' : +btn.dataset.year;
+        renderGallery();
+      });
+
+      // ----- СПЕЦИАЛЬНОСТИ -----
+      //   Сортируем по убыванию часов — пустые уедут вниз.
+      const allSpecs = Object.keys(SPECIALTIES).sort((a, b) => {
+        const ha = specStats[a] || 0;
+        const hb = specStats[b] || 0;
+        return hb - ha;
+      });
+      const totalSpecsHours = Object.values(specStats).reduce((s, v) => s + v, 0);
+
+      specsListEl.innerHTML = `
+        <button class="filter-item is-active" data-spec="all">
+          <span class="filter-item__label">Все</span>
+          <span class="filter-item__hours">${totalSpecsHours} ч</span>
+        </button>
+        ${allSpecs.map(s => {
+          // ← ИЗМЕНЕНО: для специальностей без сертификатов показываем 0 ч
+          //   и добавляем класс is-empty, чтобы визуально приглушить.
+          const hours = specStats[s] || 0;
+          return `
+            <button class="filter-item ${hours === 0 ? 'is-empty' : ''}" data-spec="${s}">
+              <span class="filter-item__label">${SPECIALTIES[s]}</span>
+              <span class="filter-item__hours">${hours} ч</span>
+            </button>
+          `;
+        }).join('')}
+      `;
+      specsListEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('.filter-item');
+        if (!btn) return;
+        specsListEl.querySelectorAll('.filter-item').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        activeSpec = btn.dataset.spec;
+        renderGallery();
+      });
+    }
+
+        // ===== Обновление сумм на кнопках аккордеонов =====
+    function updateStats(filteredCerts) {
+      const yearsSumEl = document.getElementById('acc-years-sum');
+      const specsSumEl = document.getElementById('acc-specs-sum');
+      if (!yearsSumEl || !specsSumEl) return;
+
+      let total = 0;
+      filteredCerts.forEach(f => {
+        const base = getBase(f.name);
+        const fullKey = base + '.' + getExt(f.name);
+        const hoursKey = (HOURS[fullKey] !== undefined) ? fullKey : base;
+        total += Number(HOURS[hoursKey]) || 0;
+      });
+
+      yearsSumEl.textContent = total;
+      specsSumEl.textContent = total;
+    }
+
+    // ===== Аккордеоны =====
+    function initAccordions() {
+      document.querySelectorAll('.accordion').forEach(acc => {
+        const trigger = acc.querySelector('.accordion__trigger');
+        if (!trigger) return;
+        trigger.addEventListener('click', () => {
+          const isOpen = acc.classList.toggle('is-open');
+          trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      });
+    }
+
+    // ===== Основная загрузка =====
     async function loadCertificates() {
       const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FOLDER}`;
 
@@ -1218,59 +1836,25 @@
         return;
       }
 
-      const certs = files.filter(f => f.type === 'file' && (
+      allCerts = files.filter(f => f.type === 'file' && (
         IMAGE_EXT.includes(getExt(f.name)) || PDF_EXT.includes(getExt(f.name))
       ));
 
-      if (certs.length === 0) {
+      if (allCerts.length === 0) {
         gallery.innerHTML = `<div class="error">Файлы есть, но среди них нет картинок или PDF.</div>`;
         return;
       }
 
-      certs.sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+      // Сортировка по дате (новые сверху)
+      allCerts.sort((a, b) => {
+        const ya = getYearFromBase(getBase(a.name)) || 0;
+        const yb = getYearFromBase(getBase(b.name)) || 0;
+        if (yb !== ya) return yb - ya;
+        return b.name.localeCompare(a.name, 'ru');
+      });
 
-      gallery.innerHTML = certs.map(file => {
-        const ext = getExt(file.name);
-        const base = getBase(file.name);    
-        const isPdf = PDF_EXT.includes(ext);
-        const fileUrl = file.download_url
-          || `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/${FOLDER}/${encodePath(file.name)}`;
-
-        const fullKey = base + '.' + ext;
-
-        const titleKey = (TITLES[fullKey] !== undefined) ? fullKey : base;
-        const metaKey  = (META[fullKey]   !== undefined) ? fullKey : base;
-        const hoursKey = (HOURS[fullKey]  !== undefined) ? fullKey : base;
-
-        const title = TITLES[titleKey] || humanize(base);
-        const meta  = META[metaKey] || '';
-        const typeLabel = isPdf ? 'PDF' : 'IMG';
-        const hours = HOURS[hoursKey];
-
-        const thumb = isPdf
-          ? `<div class="cert-pdf-placeholder">
-               <div class="cert-pdf-icon">PDF</div>
-               <div class="cert-pdf-label">Открыть документ</div>
-             </div>`
-          : `<img src="${fileUrl}" alt="${title}" loading="lazy">`;
-        return `
-          <a href="${fileUrl}" target="_blank" rel="noopener" class="cert-card">
-            <span class="cert-type">${typeLabel}</span>
-            ${hours ? `
-                <span class="cert-hours" title="Объём программы">
-                    <span class="cert-hours__icon" aria-hidden="true">⏱</span>
-                    <span class="cert-hours__value">${hours} ${pluralHours(hours)}</span>
-                </span>
-                ` : ''}
-            <div class="cert-thumb">${thumb}</div>
-            <div class="cert-info">
-              <h3 class="cert-title">${title}</h3>
-              ${meta ? `<p class="cert-meta">${meta}</p>` : ''}
-            </div>
-            <span class="cert-open" aria-hidden="true">↗</span>
-          </a>
-        `;
-      }).join('');
+      buildFilters();
+      renderGallery();
     }
     // Склонение слова «час» по числу
     function pluralHours(n) {
@@ -1283,6 +1867,7 @@
     return 'часов';
     }
     loadCertificates();
+    initAccordions();
     // ===== Кнопка «Наверх» =====
     (function initScrollTop() {
       const btn = document.getElementById('scroll-top');
