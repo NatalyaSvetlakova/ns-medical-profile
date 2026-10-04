@@ -1,18 +1,17 @@
 [
   {
-    "title": "...",
-    "date": "2026-09-15",
-    "description": "Как ... влияют на нашу жизнь и можно ли их изменить.",
-    "tags": ["...", "...", "..."],
-    "image": "articles/images/название.jpg",
-    "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/medical-certificates/main/articles/images/....jpg",
+    "title": "Вентиляционная функция легких, гемодинамика малого круга кровообращения и фосфор липидов конденсата выдыхаемого воздуха у больных декомпенсированным сахарным диабетом 1 типа в процессе интенсифицированной инсулинотерапии",
+    "description": "Автореферат диссертации на соискание ученой степени кандидата медицинских наук",
+    "date": "2009-12-06",  
+    "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/diss_2009.pdf",
+    "image": "articles/превью.jpg"
   },
   {
-    "title": "...",
-    "date": "2026-09-20",
-    "description": "Почему ... может передаваться из поколения в поколение",
-    "tags": ["...", "...", "..."],
-    "image": "articles/images/название.jpg",
-    "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/medical-certificates/main/articles/images/....jpg"
+    "title": "Название статьи",
+    "description": "Краткое описание статьи",
+    "date": "2024-01-15",
+    "url": "articles/статья.pdf",
+    "image": "articles/превью.jpg"
   }
+
 ]
