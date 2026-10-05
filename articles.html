@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Мои статьи — Светлакова Наталья</title>
+  <title>Архив научных публикаций — Светлакова Наталья</title>
   
     <!-- Подключение PDF.js для просмотра PDF без новых вкладок -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -955,17 +955,33 @@
 
         articles.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        gallery.innerHTML = articles.map(a => {
+          gallery.innerHTML = articles.map(a => {
           const ext = getExt(a.url || '');
           const isPdf = ext === 'pdf';
-          const typeLabel = isPdf ? 'PDF' : 'IMG';
+          const isExternal = a.external === true;
+          
+          // Определяем тип и метку
+          let typeLabel;
+          if (isExternal) {
+            typeLabel = 'ССЫЛКА';
+          } else if (isPdf) {
+            typeLabel = 'PDF';
+          } else {
+            typeLabel = 'IMG';
+          }
+          
           const thumbSrc = a.image || PLACEHOLDER;
+          
+          // Формируем атрибуты карточки
+          // Для внешних ссылок — target="_blank", открывается в новой вкладке
+          // Для PDF/IMG — data-атрибуты, открывается в модалке
+          const cardAttrs = isExternal
+            ? `href="${a.url}" target="_blank" rel="noopener" data-external="true"`
+            : `href="${a.url}" data-file-url="${a.url}" data-file-type="${isPdf ? 'pdf' : 'image'}" data-file-title="${(a.title || '').replace(/"/g, '&quot;')}"`;
+          
           return `
-            <a href="${a.url}" class="article-card"
-               data-file-url="${a.url}"
-               data-file-type="${isPdf ? 'pdf' : 'image'}"
-               data-file-title="${(a.title || '').replace(/"/g, '&quot;')}">
-              <span class="article-type">${typeLabel}</span>
+            <a ${cardAttrs} class="article-card">
+              <span class="article-type ${isExternal ? 'is-link' : ''}">${typeLabel}</span>
               <span class="article-date-badge">
                 <span aria-hidden="true">📅</span>
                 <span>${shortDate(a.date)}</span>
@@ -1074,6 +1090,12 @@
       document.addEventListener('click', function (e) {
         const card = e.target.closest('.article-card');
         if (!card) return;
+        
+        // ПРОВЕРКА: если это внешняя ссылка, даём браузеру открыть её самому
+        if (card.hasAttribute('target') && card.getAttribute('target') === '_blank') {
+          return; // Выходим, не перехватывая клик
+        }
+        
         const url = card.getAttribute('data-file-url');
         if (!url) return;
 

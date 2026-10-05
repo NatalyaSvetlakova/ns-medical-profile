@@ -4,14 +4,33 @@
     "description": "Автореферат диссертации на соискание ученой степени кандидата медицинских наук",
     "date": "2009-12-06",  
     "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/diss_2009.pdf",
-    "image": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/images/diss_2009.png"
+    "image": "articles/images/diss_2009.png"
   },
   {
-    "title": "Название статьи",
-    "description": "Краткое описание статьи",
-    "date": "2024-01-15",
-    "url": "articles/статья.pdf",
-    "image": "articles/превью.jpg"
+    "title": "Состояние вентиляционной функции легких и гемодинамики малого круга кровообращения у больных декомпенсированным сахарным диабетом 1 типа в процессе интенсифицированной инсулинотерапии",
+    "description": "У больных сахарным диабетом 1-го типа выявлено достоверное снижение вентиляционной функции легких, а интенсифицированная инсулинотерапия частично улучшает показатели внешнего дыхания и снижает систолическое давление в легочной артерии.",
+    "date": "2008-04-15",
+    "url": "https://cyberleninka.ru/article/n/sostoyanie-ventilyatsionnoy-funktsii-legkih-i-gemodinamiki-malogo-kruga-krovoobrascheniya-u-bolnyh-saharnym-diabetom-1-go-tipa-v/viewer",
+    "external": true,
+    "image": "articles/images/pmj.png"
+  },
+  {
+    "title": "Аутоиммунные полигландулярные синдромы",
+    "description": "В статье представлены клинические наблюдения аутоиммунных полигландулярных синдромов и обоснована необходимость ранней диагностики и обследования родственников для своевременного начала заместительной терапии.",
+    "date": "2006-02-13",
+    "url": "https://cyberleninka.ru/article/n/autoimmunnye-poliglandulyarnye-sindromy/viewer",
+    "external": true,
+    "image": "articles/images/pmj.png"
+ },
+  {
+    "title": "Реактивность бронхов у больных сахарным диабетом",
+    "description": "Причины и механизмы выявленных субклинических проявлений обструкции бронхов у больных сахарным диабетом нуждаются в дальнейшем изучении",
+    "date": "2000-02-18",
+    "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/tes_2000.pdf",    
+    "image": "articles/images/tes_2000.jpg"
   }
 
+
+
+  
 ]
