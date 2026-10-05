@@ -8,7 +8,7 @@
   },
   {
     "title": "Состояние вентиляционной функции легких и гемодинамики малого круга кровообращения у больных декомпенсированным сахарным диабетом 1 типа в процессе интенсифицированной инсулинотерапии",
-    "description": "У больных сахарным диабетом 1-го типа выявлено достоверное снижение вентиляционной функции легких, а интенсифицированная инсулинотерапия частично улучшает показатели внешнего дыхания и снижает систолическое давление в легочной артерии.",
+    "description": "Пермский медицинский журнал, 2008.",
     "date": "2008-04-15",
     "url": "https://cyberleninka.ru/article/n/sostoyanie-ventilyatsionnoy-funktsii-legkih-i-gemodinamiki-malogo-kruga-krovoobrascheniya-u-bolnyh-saharnym-diabetom-1-go-tipa-v/viewer",
     "external": true,
@@ -16,21 +16,39 @@
   },
   {
     "title": "Аутоиммунные полигландулярные синдромы",
-    "description": "В статье представлены клинические наблюдения аутоиммунных полигландулярных синдромов и обоснована необходимость ранней диагностики и обследования родственников для своевременного начала заместительной терапии.",
+    "description": "Пермский медицинский журнал, 2006. В соавт.",
     "date": "2006-02-13",
     "url": "https://cyberleninka.ru/article/n/autoimmunnye-poliglandulyarnye-sindromy/viewer",
     "external": true,
     "image": "articles/images/pmj.png"
- },
+  },
   {
     "title": "Реактивность бронхов у больных сахарным диабетом",
-    "description": "Причины и механизмы выявленных субклинических проявлений обструкции бронхов у больных сахарным диабетом нуждаются в дальнейшем изучении",
+    "description": "Молодые ученые - навстречу третьему тысячелетию, 2000.",
     "date": "2000-02-18",
     "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/tes_2000.pdf",    
     "image": "articles/images/tes_2000.jpg"
+  },
+  {
+    "title": "О болезни Деркума",
+    "description": "Редкие эндокринные заболевания и синдромы, 1999. В соавт.",
+    "date": "1999-01-12",
+    "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/rare_1999.pdf",    
+    "image": "articles/images/tes_2000.jpg"
+  },
+  {
+    "title": "Ультрафиолетовое облучение аутокрови в комплексном лечении больных инфильтративным туберкулезом легких",
+    "description": "Тезисы докладов 70-ой итоговой студенческой научной конференции, 1997.",
+    "date": "1997-01-24",
+    "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/tes_1997.pdf",    
+    "image": "articles/images/tes_1997.jpg"
+  },
+  {
+    "title": "Ультрафиолетовое облучение аутокрови в комплексном лечении больных инфильтративным туберкулезом легких",
+    "description": "Научная сессия 1999 года. Тезисы докладов, 1999.",
+    "date": "1999-01-22",
+    "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/tesis_1999.pdf",    
+    "image": "articles/images/tesis_1999.jpg"
   }
-
-
-
   
 ]
