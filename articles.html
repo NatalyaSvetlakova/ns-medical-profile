@@ -131,8 +131,15 @@
     /* ===== Галерея статей ===== */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(2, 1fr);grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 32px;
+    }
+
+        @media (max-width: 600px) {
+      .gallery {
+        grid-template-columns: 1fr;  /* 1 колонка на телефонах */
+        gap: 20px;
+      }
     }
 
     .article-card {
@@ -161,7 +168,7 @@
 
     .article-thumb {
       position: relative;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 16 / 10;
       background: var(--paper);
       display: flex;
       align-items: center;
@@ -205,7 +212,7 @@
     }
 
     .article-info {
-      padding: 16px 18px 18px;
+      padding: 20px 22px 22px;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
@@ -215,18 +222,18 @@
     .article-title {
       font-family: Georgia, serif;
       font-weight: 500;
-      font-size: 1.02rem;
+      font-size: 1.15rem;
       margin: 0;
       line-height: 1.35;
       color: var(--text);
       display: -webkit-box;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
 
     .article-meta {
-      font-size: 0.82rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       margin: 0;
       display: -webkit-box;
@@ -772,6 +779,401 @@
         height: 42px;
       }
     }
+        /* ====================== ДВУХКОЛОНОЧНАЯ РАСКЛАДКА СТАТЕЙ ====================== */
+    .articles-layout {
+      display: grid;
+      grid-template-columns: 360px minmax(0, 1fr);
+      gap: 40px;
+      align-items: start;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 960px) {
+      .articles-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    /* ====================== ПУТЬ В НАУКУ ====================== */
+    .journey {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px 22px 30px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .journey__header {
+      position: relative;
+      padding: 18px 16px 22px;
+      margin: -6px -6px 22px; /* немного «выходим» за края блока */
+      text-align: center;
+      background: linear-gradient(
+        180deg,
+        rgba(201, 169, 97, 0.08) 0%,
+        rgba(201, 169, 97, 0.02) 70%,
+        transparent 100%
+      );
+      border-bottom: 2px solid transparent;
+      border-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(201, 169, 97, 0.7) 20%,
+        rgba(201, 169, 97, 0.9) 50%,
+        rgba(201, 169, 97, 0.7) 80%,
+        transparent 100%
+      ) 1;
+    }
+
+    /* Заголовок делаем золотисто-синим с легким свечением */
+    .journey__title {
+      font-family: Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--primary);
+      margin: 0 0 6px;
+      text-shadow: 0 1px 0 rgba(201, 169, 97, 0.15);
+    }
+
+    /* Подзаголовок "1996 → 2010" — золотистый, с буквами вразрядку */
+    .journey__subtitle {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c9a961;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    /* Тёмная тема */
+    html[data-theme="dark"] .journey__header {
+      background: linear-gradient(
+        180deg,
+        rgba(212, 178, 116, 0.1) 0%,
+        rgba(212, 178, 116, 0.03) 70%,
+        transparent 100%
+      );
+    }
+    html[data-theme="dark"] .journey__subtitle {
+      color: #d4b274;
+    }
+
+    .journey__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    /* Пунктирная вертикальная линия */
+    .journey__list::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background-image: linear-gradient(
+        to bottom,
+        var(--primary) 0%,
+        var(--primary) 60%,
+        var(--accent) 100%
+      );
+      background-size: 2px 8px;
+      background-repeat: repeat-y;
+      opacity: 0.5;
+    }
+
+    /* ====================== МАРКЕР ПУТИ ====================== */
+    .journey__item {
+      position: relative;
+      padding: 0 0 22px 56px;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .journey__item:hover {
+      transform: translateX(4px);
+    }
+
+    /* Точка-маркер */
+    .journey__dot {
+      position: absolute;
+      left: 8px;
+      top: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      box-shadow: 0 0 0 4px var(--bg-card);
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 1;
+    }
+
+    .journey__item:hover .journey__dot {
+      background: var(--primary);
+      color: #fff;
+      transform: scale(1.15);
+      box-shadow:
+        0 0 0 4px var(--bg-card),
+        0 0 0 6px rgba(14, 107, 168, 0.2);
+    }
+
+    /* Финишный флажок — диссертация */
+    .journey__item--dissertation .journey__dot {
+      width: 38px;
+      height: 38px;
+      left: 0;
+      border-color: var(--accent);
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      color: #fff;
+      font-size: 18px;
+      box-shadow:
+        0 0 0 5px var(--bg-card),
+        0 0 0 8px rgba(46, 196, 182, 0.2),
+        0 4px 16px rgba(46, 196, 182, 0.4);
+    }
+
+    .journey__item--dissertation .journey__dot::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px dashed var(--accent);
+      opacity: 0.6;
+      animation: spinSlow 18s linear infinite;
+    }
+
+    @keyframes spinSlow {
+      to { transform: rotate(360deg); }
+    }
+
+    .journey__item--dissertation:hover .journey__dot {
+      transform: scale(1.08) rotate(-5deg);
+      background: linear-gradient(135deg, #2ec4b6, #0e6ba8);
+      box-shadow:
+        0 0 0 5px var(--bg-card),
+        0 0 0 10px rgba(46, 196, 182, 0.3),
+        0 6px 22px rgba(46, 196, 182, 0.55);
+    }
+
+    /* Текст у маркера */
+    .journey__year {
+      display: inline-block;
+      font-family: Georgia, serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      letter-spacing: 0.5px;
+    }
+
+    .journey__item--dissertation .journey__year {
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
+
+    .journey__item-title {
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.35;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: color 0.2s;
+    }
+
+    .journey__item:hover .journey__item-title {
+      color: var(--primary);
+    }
+
+    .journey__badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--primary-soft);
+      padding: 2px 7px;
+      border-radius: 100px;
+      margin-top: 6px;
+    }
+
+    .journey__item--dissertation .journey__badge {
+      background: linear-gradient(135deg, #2ec4b6, #0e6ba8);
+      color: #fff;
+    }
+
+    /* Мобильная адаптация */
+    @media (max-width: 600px) {
+      .journey { padding: 20px 16px 22px; }
+      .journey__list::before { left: 16px; }
+      .journey__item { padding-left: 48px; }
+      .journey__dot { left: 4px; }
+      .journey__item--dissertation .journey__dot { left: -2px; }
+    }
+
+    /* ====================== МОДАЛКА ПЕЧАТНОЙ РАБОТЫ ====================== */
+    .work-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .work-modal.is-open { display: flex; }
+
+    .work-modal__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(8, 18, 30, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .work-modal.is-open .work-modal__backdrop { opacity: 1; }
+
+    .work-modal__content {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      max-width: 640px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 30px 90px rgba(8, 18, 30, 0.55);
+      opacity: 0;
+      transform: scale(0.95) translateY(10px);
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .work-modal.is-open .work-modal__content {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Золотая рамка внутри модалки */
+    .work-modal__content::before {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(201, 169, 97, 0.45);
+      border-radius: 14px;
+      pointer-events: none;
+      transition: border-color 0.4s ease, inset 0.4s ease;
+      z-index: 1;
+    }
+
+    .work-modal.is-open .work-modal__content::before {
+      border-color: rgba(201, 169, 97, 0.95);
+      inset: 10px;
+    }
+
+    /* Тёмная тема */
+    html[data-theme="dark"] .work-modal__content::before {
+      border-color: rgba(212, 178, 116, 0.55);
+    }
+
+    .work-modal__close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 2;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: all 0.25s ease;
+    }
+    .work-modal__close:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      transform: rotate(90deg);
+    }
+
+    .work-modal__body {
+      padding: 34px 32px 30px;
+    }
+
+    .work-modal__type {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--primary);
+      background: var(--primary-soft);
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+    }
+
+    .work-modal__field {
+      margin-bottom: 20px;
+    }
+
+    .work-modal__label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .work-modal__value {
+      font-family: Georgia, serif;
+      font-size: 1rem;
+      line-height: 1.45;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .work-modal__field--title .work-modal__value {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.35;
+    }
+
+    .work-modal__field--source .work-modal__value {
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 600px) {
+      .work-modal__body { padding: 28px 20px 22px; }
+      .work-modal__field--title .work-modal__value { font-size: 1.05rem; }
+    }
+
+    /* Тёмная тема */
+    html[data-theme="dark"] .work-modal__backdrop {
+      background: rgba(0, 0, 0, 0.85);
+    }
   </style>
 </head>
 <body>
@@ -808,13 +1210,44 @@
           <path d="M14 3v5h5"/>
           <path d="M8 13h8M8 17h5"/>
         </svg>
-        <span>Статьи</span>
+        <span>Публикации</span>
       </a>
     </nav>
 
-    <div class="gallery" id="gallery">
-      <div class="loading">Загружаю статьи…</div>
+  <div class="articles-layout">
+    
+    <!-- ЛЕВАЯ КОЛОНКА: Путь в науку -->
+    <aside class="journey" aria-label="Путь в науку">
+      <div class="journey__header">
+        <h2 class="journey__title">Этапы научного поиска</h2>
+        <p class="journey__subtitle">1996 → 2010</p>
+      </div>
+      <ol class="journey__list" id="journey-list">
+        <!-- Сюда JS отрисует маркеры -->
+      </ol>
+    </aside>
+
+    <!-- ПРАВАЯ КОЛОНКА: Галерея PDF -->
+    <main class="articles-main">
+      <div class="gallery" id="gallery">
+        <div class="loading">Загружаю статьи…</div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Модалка печатной работы -->
+  <div class="work-modal" id="work-modal" aria-hidden="true">
+    <div class="work-modal__backdrop" data-work-close></div>
+    <div class="work-modal__content" role="dialog" aria-modal="true">
+      <button class="work-modal__close" data-work-close aria-label="Закрыть">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <div class="work-modal__body" id="work-modal-body"></div>
     </div>
+  </div>
   </div>
 
   <footer class="site-footer">
@@ -920,6 +1353,129 @@
     // ===== Загрузка статей =====
     const gallery = document.getElementById('gallery');
 
+    const JOURNEY = [
+  {
+    year: 2010,
+    type: 'dissertation',
+    icon: '🎓',
+    authors: 'Светлакова Н. В.',
+    title: 'Вентиляционная функция легких, гемодинамика малого круга кровообращения и фосфор липидов конденсата выдыхаемого воздуха у больных декомпенсированным сахарным диабетом 1 типа в процессе интенсифицированной инсулинотерапии',
+    source: 'Диссертация на соискание учёной степени кандидата медицинских наук. — Самара, 2010.'
+  },
+  {
+    year: 2008,
+    type: 'article',
+    icon: '📖',
+    authors: 'Светлакова Н. В.',
+    title: 'Состояние вентиляционной функции легких и гемодинамики малого круга кровообращения у больных сахарным диабетом типа 1 в процессе интенсифицированной инсулинотерапии',
+    source: 'Пермский медицинский журнал. — 2008. — Т. XXV, № 4. — С. 47–53.'
+  },
+  {
+    year: 2008,
+    type: 'article',
+    icon: '📖',
+    authors: 'Светлакова Н. В., Щекотов В. В.',
+    title: 'Особенности центральной гемодинамики и торакального объема жидкости у больных сахарным диабетом 1 типа',
+    source: 'Пермский медицинский журнал. — 2008. — Т. XXV, № 1. — С. 91–93.'
+  },
+  {
+    year: 2006,
+    type: 'article',
+    icon: '📖',
+    authors: 'Атаманов В. М., Демичева Т. П., Светлакова Н. В. и др.',
+    title: 'Аутоиммунные полигландулярные синдромы',
+    source: 'Пермский медицинский журнал. — 2006. — № 2. — С. 153–155.'
+  },
+  {
+    year: 2004,
+    type: 'collection',
+    icon: '📚',
+    authors: 'Атаманов В. М., Светлакова Н. В.',
+    title: 'Случай надпочечниковой гиперандрогении с двухсторонней адреналэктомией, последующей беременностью и родами',
+    source: 'Современные аспекты хирургической эндокринологии: Материалы XIV Российского симпозиума с международным участием. — Ярославль, 2004. — С. 21–23.'
+  },
+  {
+    year: 2000,
+    type: 'thesis',
+    icon: '📄',
+    authors: 'Светлакова Н. В.',
+    title: 'Реактивность бронхов у больных сахарным диабетом',
+    source: 'Молодые ученые — навстречу третьему тысячелетию: Тезисы докладов научно-практической конференции. — Пермь, 2000. — С. 24–26.'
+  },
+  {
+    year: 2000,
+    type: 'thesis',
+    icon: '📄',
+    authors: 'Светлакова Н. В., Атаманов В. М., Щекотов В. В.',
+    title: 'Реактивность бронхов у больных сахарным диабетом',
+    source: 'Актуальные вопросы эндокринологии: Тезисы докладов 3-й Всероссийской научно-практической конференции. — Пермь, 2000. — С. 50–51.'
+  },
+  {
+    year: 2000,
+    type: 'thesis',
+    icon: '📄',
+    authors: 'Светлакова Н. В.',
+    title: 'Особенности суточного ритма пиковой объемной скорости выдоха у больных сахарным диабетом',
+    source: 'Молодежная наука Прикамья — 2000: Тезисы докладов областной научной конференции молодых ученых, студентов и аспирантов. — Пермь, 2000. — С. 77–78.'
+  },
+  {
+    year: 1999,
+    type: 'collection',
+    icon: '📚',
+    authors: 'Атаманов В. М., Голышева В. А., Светлакова Н. В.',
+    title: 'О болезни Деркума',
+    source: 'Редкие эндокринные заболевания и синдромы: трудности диагностики, ошибки: Межвузовский сборник научных трудов. — Пермь, 1999. — С. 14–21.'
+  },
+  {
+    year: 1999,
+    type: 'thesis',
+    icon: '📄',
+    authors: 'Атаманов В. М., Романкова М. Г., Светлакова Н. В.',
+    title: 'Причины изменения структуры экстренной госпитализации и летальности больных сахарным диабетом',
+    source: 'Актуальные вопросы эндокринологии: Тезисы докладов 2-й Всероссийской научно-практической конференции. — Пермь, 1999. — С. 7–8.'
+  },
+  {
+    year: 1999,
+    type: 'thesis',
+    icon: '📄',
+    authors: 'Светлакова Н. В.',
+    title: 'Клинико-лабораторные особенности хронического бронхита при сахарном диабете',
+    source: 'Актуальные вопросы медицинской науки и здравоохранения: Материалы 54-й научной конференции молодых ученых и студентов. — Екатеринбург, 1999. — С. 93–94.'
+  },
+  {
+    year: 1998,
+    type: 'thesis',
+    icon: '📄',
+    authors: 'Светлакова Н. В., Атаманов В. М.',
+    title: 'Клинико-рентгенологические особенности пневмоний, возникающих на фоне сахарного диабета',
+    source: 'Тезисы докладов научно-практической конференции. — Пермь, 1998.'
+  },
+  {
+    year: 1998,
+    type: 'thesis',
+    icon: '📄',
+    authors: 'Рассохина Т. В., Чупина (Светлакова) Н. В.',
+    title: 'Особенности неврологических проявлений Лайм-боррелиоза в популяции Пермской области',
+    source: 'Вопросы теоретической и практической медицины: Тезисы докладов Республиканской молодежной научной конференции. — Уфа, 1998. — С. 79.'
+  },
+  {
+    year: 1997,
+    type: 'thesis',
+    icon: '📄',
+    authors: 'Чупина (Светлакова) Н. В.',
+    title: 'Ультрафиолетовое облучение аутокрови в комплексном лечении больных инфильтративным туберкулезом легких',
+    source: 'Тезисы докладов 70-й итоговой студенческой научной конференции. — Пермь, 1997. — С. 80.'
+  },
+  {
+    year: 1996,
+    type: 'thesis',
+    icon: '📄',
+    authors: 'Чупина (Светлакова) Н. В.',
+    title: 'Влияние ультрафиолетового облучения аутокрови на течение затяжной пневмонии',
+    source: 'Тезисы докладов 69-й итоговой студенческой научной конференции. — Пермь, 1996.'
+  }
+];
+
     function shortDate(iso) {
       const d = new Date(iso);
       const dd = String(d.getDate()).padStart(2, '0');
@@ -1004,6 +1560,93 @@
     }
 
     loadArticles();
+
+        // ====================== ПУТЬ В НАУКУ ======================
+    (function initJourney() {
+      const list = document.getElementById('journey-list');
+      const modal = document.getElementById('work-modal');
+      const modalBody = document.getElementById('work-modal-body');
+      if (!list || !modal || !modalBody) return;
+
+      const TYPE_LABELS = {
+        dissertation: 'Диссертация',
+        article: 'Статья',
+        thesis: 'Тезисы',
+        collection: 'Сборник'
+      };
+
+      // Рисуем маркеры
+      list.innerHTML = JOURNEY.map((work, i) => {
+        const isDiss = work.type === 'dissertation';
+        return `
+          <li class="journey__item ${isDiss ? 'journey__item--dissertation' : ''}"
+              data-index="${i}" tabindex="0" role="button"
+              aria-label="Открыть: ${work.title.replace(/"/g, '&quot;')}">
+            <span class="journey__dot">${work.icon}</span>
+            <span class="journey__year">${work.year}</span>
+            <p class="journey__item-title">${work.title}</p>
+            <span class="journey__badge">${TYPE_LABELS[work.type] || ''}</span>
+          </li>
+        `;
+      }).join('');
+
+      // Открытие модалки с информацией о работе
+      function openWork(index) {
+        const w = JOURNEY[index];
+        if (!w) return;
+
+        modalBody.innerHTML = `
+          <span class="work-modal__type">${TYPE_LABELS[w.type] || ''} · ${w.year}</span>
+
+          <div class="work-modal__field">
+            <span class="work-modal__label">Авторы</span>
+            <p class="work-modal__value">${w.authors}</p>
+          </div>
+
+          <div class="work-modal__field work-modal__field--title">
+            <span class="work-modal__label">Название</span>
+            <p class="work-modal__value">${w.title}</p>
+          </div>
+
+          <div class="work-modal__field work-modal__field--source">
+            <span class="work-modal__label">Источник</span>
+            <p class="work-modal__value">${w.source}</p>
+          </div>
+        `;
+
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+      }
+
+      function closeWork() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+      }
+
+      // Клик по маркеру
+      list.addEventListener('click', (e) => {
+        const item = e.target.closest('.journey__item');
+        if (item) openWork(+item.dataset.index);
+      });
+
+      // Клавиатура (Enter/Space)
+      list.addEventListener('keydown', (e) => {
+        if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('journey__item')) {
+          e.preventDefault();
+          openWork(+e.target.dataset.index);
+        }
+      });
+
+      // Закрытие модалки
+      modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-work-close]')) closeWork();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeWork();
+      });
+    })();
 
     // ===== Модальное окно с поддержкой PDF.js =====
     (function initModal() {

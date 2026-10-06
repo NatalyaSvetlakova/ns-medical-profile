@@ -12,7 +12,7 @@
     "date": "2008-04-15",
     "url": "https://cyberleninka.ru/article/n/sostoyanie-ventilyatsionnoy-funktsii-legkih-i-gemodinamiki-malogo-kruga-krovoobrascheniya-u-bolnyh-saharnym-diabetom-1-go-tipa-v/viewer",
     "external": true,
-    "image": "articles/images/pmj.png"
+    "image": "articles/images/pmj.jpg"
   },
   {
     "title": "Аутоиммунные полигландулярные синдромы",
@@ -20,7 +20,7 @@
     "date": "2006-02-13",
     "url": "https://cyberleninka.ru/article/n/autoimmunnye-poliglandulyarnye-sindromy/viewer",
     "external": true,
-    "image": "articles/images/pmj.png"
+    "image": "articles/images/pmj.jpg"
   },
   {
     "title": "Реактивность бронхов у больных сахарным диабетом",
@@ -34,7 +34,7 @@
     "description": "Редкие эндокринные заболевания и синдромы, 1999. В соавт.",
     "date": "1999-01-12",
     "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/rare_1999.pdf",    
-    "image": "articles/images/tes_2000.jpg"
+    "image": "articles/images/rare_1999.png"
   },
   {
     "title": "Ультрафиолетовое облучение аутокрови в комплексном лечении больных инфильтративным туберкулезом легких",
@@ -44,11 +44,17 @@
     "image": "articles/images/tes_1997.jpg"
   },
   {
-    "title": "Ультрафиолетовое облучение аутокрови в комплексном лечении больных инфильтративным туберкулезом легких",
-    "description": "Научная сессия 1999 года. Тезисы докладов, 1999.",
+    "title": "Клинико-рентгенологические и лабораторные особенности пневмоний на фоне сахарного диабета",
+    "description": "Научная сессия 1999 года. Тезисы докладов, 1999. С соавт.",
     "date": "1999-01-22",
     "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/tesis_1999.pdf",    
-    "image": "articles/images/tesis_1999.jpg"
-  }
-  
+    "image": "articles/images/tesis_1999.png"
+  },
+  {
+    "title": "Особенности гемодинамики и торакального объема жидкости у больных сахарным диабетом 1 типа",
+    "description": "Пермский медицинский журнал, 2008. В соавт.",
+    "date": "2008-05-16",
+    "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/art_1999.pdf",    
+    "image": "articles/images/pmj.jpg"
+  }  
 ]
