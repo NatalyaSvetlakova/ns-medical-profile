@@ -4,21 +4,21 @@
     "description": "Диссертация на соискание ученой степени кандидата медицинских наук",
     "date": "2010-01-13",  
     "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/dissert.pdf",
-    "image": "articles/images/dissert.png"
+    "image": "articles/images/dissert.webp"
   },
   {
     "title": "Вентиляционная функция легких, гемодинамика малого круга кровообращения и фосфор липидов конденсата выдыхаемого воздуха у больных декомпенсированным сахарным диабетом 1 типа в процессе интенсифицированной инсулинотерапии",
     "description": "Презентация к защите диссертации. Светлакова Н.В.",
     "date": "2010-01-13",  
     "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/present.pdf",
-    "image": "articles/images/present.png"
+    "image": "articles/images/present.webp"
   },
   {
     "title": "Вентиляционная функция легких, гемодинамика малого круга кровообращения и фосфор липидов конденсата выдыхаемого воздуха у больных декомпенсированным сахарным диабетом 1 типа в процессе интенсифицированной инсулинотерапии",
     "description": "Автореферат диссертации на соискание ученой степени кандидата медицинских наук",
     "date": "2009-12-06",  
     "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/diss_2009.pdf",
-    "image": "articles/images/diss_2009.png"
+    "image": "articles/images/diss_2009.webp"
   },
   {
     "title": "Состояние вентиляционной функции легких и гемодинамики малого круга кровообращения у больных декомпенсированным сахарным диабетом 1 типа в процессе интенсифицированной инсулинотерапии",
@@ -26,7 +26,7 @@
     "date": "2008-04-15",
     "url": "https://cyberleninka.ru/article/n/sostoyanie-ventilyatsionnoy-funktsii-legkih-i-gemodinamiki-malogo-kruga-krovoobrascheniya-u-bolnyh-saharnym-diabetom-1-go-tipa-v/viewer",
     "external": true,
-    "image": "articles/images/pmj.jpg"
+    "image": "articles/images/pmj.webp"
   },
   {
     "title": "Аутоиммунные полигландулярные синдромы",
@@ -34,41 +34,41 @@
     "date": "2006-02-13",
     "url": "https://cyberleninka.ru/article/n/autoimmunnye-poliglandulyarnye-sindromy/viewer",
     "external": true,
-    "image": "articles/images/pmj.jpg"
+    "image": "articles/images/pmj.webp"
   },
   {
     "title": "Реактивность бронхов у больных сахарным диабетом",
     "description": "Молодые ученые - навстречу третьему тысячелетию, 2000.",
     "date": "2000-02-18",
     "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/thes_2000.pdf",    
-    "image": "articles/images/thes_2000.jpg"
+    "image": "articles/images/thes_2000.webp"
   },
   {
     "title": "О болезни Деркума",
     "description": "Редкие эндокринные заболевания и синдромы, 1999. В соавт.",
     "date": "1999-01-12",
     "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/rare_1999.pdf",    
-    "image": "articles/images/rare_1999.png"
+    "image": "articles/images/rare_1999.webp"
   },
   {
     "title": "Ультрафиолетовое облучение аутокрови в комплексном лечении больных инфильтративным туберкулезом легких",
     "description": "Тезисы докладов 70-ой итоговой студенческой научной конференции, 1997.",
     "date": "1997-01-24",
     "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/thes_1997.pdf",    
-    "image": "articles/images/thes_1997.jpg"
+    "image": "articles/images/thes_1997.webp"
   },
   {
     "title": "Клинико-рентгенологические и лабораторные особенности пневмоний на фоне сахарного диабета",
     "description": "Научная сессия 1999 года. Тезисы докладов, 1999. С соавт.",
     "date": "1999-01-22",
     "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/thesis_1999.pdf",    
-    "image": "articles/images/thesis_1999.png"
+    "image": "articles/images/thesis_1999.webp"
   },
   {
     "title": "Особенности гемодинамики и торакального объема жидкости у больных сахарным диабетом 1 типа",
     "description": "Пермский медицинский журнал, 2008. В соавт.",
     "date": "2008-05-16",
     "url": "https://raw.githubusercontent.com/NatalyaSvetlakova/ns-medical-profile/main/articles/art_2008.pdf",    
-    "image": "articles/images/pmj.jpg"
+    "image": "articles/images/pmj.webp"
   }  
 ]
