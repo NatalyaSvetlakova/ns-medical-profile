@@ -1026,7 +1026,7 @@ html[data-theme="dark"] .modal__theme:hover {
     display: block;
     padding: 10px;
     background: #ffffff;
-    border: 1px solid rgba(74, 159, 212, 0.35);
+    border: 1px solid rgba(201, 169, 97, 0.5); /* Золотистая рамка */
     border-radius: 14px;
     box-shadow:
     0 30px 90px rgba(8, 18, 30, 0.55),
@@ -1035,13 +1035,12 @@ html[data-theme="dark"] .modal__theme:hover {
     animation: fadeInImg 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* В тёмной теме картинка тоже с голубым ободком */
 html[data-theme="dark"] .modal__body img {
-    border-color: rgba(107, 182, 224, 0.4);
-    box-shadow:
-    0 30px 90px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(107, 182, 224, 0.15) inset,
-    0 0 50px rgba(107, 182, 224, 0.2);
+  background: var(--bg-card);   
+  border: 1px solid rgba(212, 178, 116, 0.3);   
+  box-shadow: 
+    0 30px 90px rgba(0, 0, 0, 0.8), 
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset; 
 }
 
 /* Блокировка скролла при открытом модальном окне */
